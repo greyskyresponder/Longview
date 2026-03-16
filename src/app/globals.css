@@ -1,0 +1,44 @@
+@import 'tailwindcss';
+
+:root {
+  /* LvSG Brand Colors */
+  --color-command-navy: #0a1628;
+  --color-steel-blue: #1b2b45;
+  --color-operational-steel: #2c3e5a;
+  --color-signal-gold: #c5933a;
+  --color-warm-gold-light: #f5e6c8;
+  --color-clean-white: #ffffff;
+  --color-light-gray: #f0f2f5;
+  --color-medium-gray: #8b95a5;
+  --color-dark-charcoal: #3a4555;
+  --color-alert-red: #b53b2e;
+
+  --background: var(--color-clean-white);
+  --foreground: var(--color-dark-charcoal);
+}
+
+@theme inline {
+  --color-command-navy: var(--color-command-navy);
+  --color-steel-blue: var(--color-steel-blue);
+  --color-operational-steel: var(--color-operational-steel);
+  --color-signal-gold: var(--color-signal-gold);
+  --color-warm-gold-light: var(--color-warm-gold-light);
+  --color-clean-white: var(--color-clean-white);
+  --color-light-gray: var(--color-light-gray);
+  --color-medium-gray: var(--color-medium-gray);
+  --color-dark-charcoal: var(--color-dark-charcoal);
+  --color-alert-red: var(--color-alert-red);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}

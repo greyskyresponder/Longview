@@ -29,6 +29,7 @@
 ---
 
 ### Sprint 0 -- Project Setup & Infrastructure
+
 **Goal:** Development environment, tooling, and CI/CD pipeline operational.
 
 **Prerequisites:** Tech stack decision finalized. Domain name secured or confirmed. Hosting account authorized.
@@ -45,6 +46,7 @@
 - [ ] Create project documentation (README, contributing guide)
 
 **Definition of Done:**
+
 - [ ] `localhost:3000` renders a blank Next.js app without errors
 - [ ] `git push` to `main` triggers a successful Vercel deployment to a live preview URL
 - [ ] Sanity Studio is accessible and authenticated
@@ -55,6 +57,7 @@
 ---
 
 ### Sprint 1 -- Design System & Core Layout
+
 **Goal:** Implement the visual identity system and site shell.
 
 **Prerequisites:** Sprint 0 DoD met. Architecture doc Section 7 (Visual Identity) reviewed and approved as the design source of truth.
@@ -77,6 +80,7 @@
 - [ ] **Icon set:** Source or create thin-line icons inspired by military symbology/ICS
 
 **Definition of Done:**
+
 - [ ] Site shell (nav + utility bar + footer + content area) renders correctly at 375px, 768px, 1024px, 1440px, 1920px
 - [ ] All 10 brand colors are tokenized and applied consistently
 - [ ] All 5 typography tiers render with correct fonts, weights, and sizes
@@ -88,6 +92,7 @@
 ---
 
 ### Sprint 2 -- Homepage: Hero, Status Bar, Mission
+
 **Goal:** Build the top half of the homepage -- first impression sections.
 
 **Prerequisites:** Sprint 1 DoD met and design approved. Hero background image provided or placeholder approved. Status bar initial data values confirmed.
@@ -109,6 +114,7 @@
 - [ ] **Performance baseline:** Lighthouse audit target >90 all categories
 
 **Definition of Done:**
+
 - [ ] Hero section loads with background image in <2 seconds on standard broadband
 - [ ] Status bar displays 4 data points, each editable in Sanity Studio
 - [ ] Mission statement renders with lighthouse watermark visible but subtle
@@ -120,6 +126,7 @@
 ---
 
 ### Sprint 3 -- Homepage: Capabilities, Operations, Government
+
 **Goal:** Build the middle sections of the homepage.
 
 **Prerequisites:** Sprint 2 DoD met. Mapbox account created. At minimum 3 deployment locations with lat/long coordinates confirmed for map markers. Six capability one-line descriptions finalized.
@@ -141,6 +148,7 @@
   - "DOWNLOAD CAPABILITY STATEMENT" CTA
 
 **Definition of Done:**
+
 - [ ] 6 capability cards render in 3x2 grid on desktop, stack correctly on mobile
 - [ ] Mapbox map loads with dark theme and at least 3 gold deployment markers
 - [ ] 3 deployment cards display beneath the map with real or approved placeholder data
@@ -152,6 +160,7 @@
 ---
 
 ### Sprint 4 -- Homepage Complete + CMS Schemas
+
 **Goal:** Complete the homepage. Build foundational Sanity schemas for all Phase 1 content types.
 
 **Prerequisites:** Sprint 3 DoD met. Decisions made on: Grey Sky Drone Program description (public or placeholder), National Disaster Database description (public or placeholder).
@@ -175,6 +184,7 @@
 - [ ] **Sanity Studio customization:** Brand the Studio with LvSG colors, organize document types by section
 
 **Definition of Done:**
+
 - [ ] Full homepage scrolls from hero through footer with all 12 sections rendering
 - [ ] All Sanity schemas are defined, and sample documents can be created/edited/published in Studio
 - [ ] Intel preview cards pull from Sanity (even if seed data is placeholder)
@@ -186,9 +196,11 @@
 ---
 
 ### Sprint 5 -- Company Section Pages
+
 **Goal:** Build all 3 Company section pages.
 
 **Prerequisites:** Sprint 4 DoD met. The following content must be provided or explicitly deferred:
+
 - Roy's bio, photo, and career timeline data
 - Organizational milestones for the 2005-present timeline
 - The 7 values with their 18th-century definitions and operational applications
@@ -217,6 +229,7 @@
   - CTAs: Join Our Mission, Explore Careers
 
 **Definition of Done:**
+
 - [ ] About page renders with timeline, map, stats, and narrative -- all editable via Sanity
 - [ ] Leadership page displays Roy's profile with bio, photo, career timeline, and certifications
 - [ ] Mission & Values page presents all 7 values with operational applications
@@ -228,9 +241,11 @@
 ---
 
 ### Sprint 6 -- Capabilities & Government Section Pages
+
 **Goal:** Build the core service and government pages.
 
 **Prerequisites:** Sprint 5 DoD met. The following content must be provided or explicitly deferred:
+
 - Service descriptions for all 8 service areas
 - Program descriptions for all 6 programs
 - Contract vehicle details (Florida DMS State Term Contract number, DUNS/UEI, NAICS codes)
@@ -273,6 +288,7 @@
   - Framework alignment badges
 
 **Definition of Done:**
+
 - [ ] All 4 Capabilities pages render with content from Sanity
 - [ ] All 4 Government pages render with contract vehicle data and at least 1 downloadable capability statement
 - [ ] Framework alignment matrix displays correctly on Methodology page
@@ -284,9 +300,11 @@
 ---
 
 ### Sprint 7 -- Operations Section, Contact Forms & Phase 1 Launch Prep
+
 **Goal:** Build remaining core pages, forms, and prepare for launch.
 
 **Prerequisites:** Sprint 6 DoD met. The following must be resolved:
+
 - At least 8 deployment records with complete data entered in Sanity
 - At least 3 case studies written in AAR format
 - Consultation form routing decided (which email addresses receive which requirement types)
@@ -334,6 +352,7 @@
   - Analytics verification
 
 **Definition of Done:**
+
 - [ ] Deployments page displays 8+ deployments with working map and filters
 - [ ] 3+ case studies published in full AAR format
 - [ ] Consultation form submits successfully and routes to correct email addresses (tested)
@@ -347,12 +366,12 @@
 
 **Decision Gate -- PHASE 1 LAUNCH DECISION:** Roy conducts a full site walkthrough and answers the 5 government evaluator questions from Section 4 of the architecture doc:
 
-| Question | Where on site | Verdict |
-|----------|--------------|---------|
-| Can they do it? | Capabilities section | ☐ Pass / ☐ Fail |
-| Have they done it? | Operations section | ☐ Pass / ☐ Fail |
-| Will they show up? | Status bar, Contact | ☐ Pass / ☐ Fail |
-| Can they scale? | Deployments, Programs | ☐ Pass / ☐ Fail |
+| Question            | Where on site           | Verdict         |
+| ------------------- | ----------------------- | --------------- |
+| Can they do it?     | Capabilities section    | ☐ Pass / ☐ Fail |
+| Have they done it?  | Operations section      | ☐ Pass / ☐ Fail |
+| Will they show up?  | Status bar, Contact     | ☐ Pass / ☐ Fail |
+| Can they scale?     | Deployments, Programs   | ☐ Pass / ☐ Fail |
 | Are they compliant? | Government, Methodology | ☐ Pass / ☐ Fail |
 
 **All 5 must pass.** If any fail, identify what's missing and resolve before launch. Once all pass → **PHASE 1 GOES LIVE.** Domain pointed to production. Site is public.
@@ -365,6 +384,7 @@
 **Gate Owner:** Roy
 
 **Questions to answer before Phase 2 begins:**
+
 1. Is the core site generating any inbound traffic or inquiries? (Validates the foundation is working)
 2. Does Roy have a content pipeline -- at least 5 briefing topics identified and outlined?
 3. Is a content author workflow needed (i.e., will anyone besides Roy publish), and if so, who?
@@ -382,6 +402,7 @@
 ---
 
 ### Sprint 8 -- Intel Section: Briefings Infrastructure
+
 **Goal:** Build the thought leadership publishing platform.
 
 **Prerequisites:** Phase Gate 1→2 cleared. Email newsletter platform selected. At least 5 briefing topics identified.
@@ -407,6 +428,7 @@
 - [ ] **Portable Text custom components** for callouts, data tables, image galleries
 
 **Definition of Done:**
+
 - [ ] A briefing can be created in Sanity, published, and rendered on the site with correct formatting
 - [ ] Briefing list page displays cards with category filtering and pagination
 - [ ] Detail page renders Portable Text with all custom components (callouts, tables, images)
@@ -418,6 +440,7 @@
 ---
 
 ### Sprint 9 -- Situation Reports, White Papers & Newsletter
+
 **Goal:** Build the remaining Intel content types and email distribution.
 
 **Prerequisites:** Sprint 8 DoD met. Newsletter platform account created. Decision made on whether White Papers will be gated (email capture required) or open.
@@ -444,6 +467,7 @@
   - 1 white paper (Trust, but Verify or Disaster Database)
 
 **Definition of Done:**
+
 - [ ] SitRep template renders in ICS format with map, severity, and timestamp
 - [ ] White Paper page displays with abstracts and download mechanism
 - [ ] Email subscribe forms capture addresses and sync to newsletter platform
@@ -455,6 +479,7 @@
 ---
 
 ### Sprint 10 -- Search & Deployment Map Interactivity
+
 **Goal:** Add site-wide search and enhance the deployment map.
 
 **Prerequisites:** Sprint 9 DoD met. Algolia account created. Sufficient content exists to make search useful (minimum: all pages + 5 briefings + 8 deployments).
@@ -475,6 +500,7 @@
 - [ ] **"States Served" hover map** on the homepage status bar
 
 **Definition of Done:**
+
 - [ ] Search returns relevant results for: a service name, a deployment name, a briefing topic, and a framework acronym (NIMS, HSEEP)
 - [ ] Search results are filterable by content type
 - [ ] Deployment map markers are clickable and navigate to detail pages
@@ -486,9 +512,11 @@
 ---
 
 ### Sprint 11 -- PDF Downloads & Document System
+
 **Goal:** Build the document download and capability statement system.
 
 **Prerequisites:** Sprint 10 DoD met. PDF files prepared:
+
 - At least 1 master capability statement
 - At least 1 service-specific one-pager
 - Decision on whether downloads require email capture
@@ -509,6 +537,7 @@
 - [ ] **Government compliance documentation** downloadable from Contract Vehicles page
 
 **Definition of Done:**
+
 - [ ] All PDF downloads function correctly across browsers
 - [ ] Download events fire in analytics
 - [ ] Email capture (if enabled) syncs to newsletter platform
@@ -520,6 +549,7 @@
 ---
 
 ### Sprint 12 -- SEO Authority & Performance Optimization
+
 **Goal:** Harden SEO, performance, and accessibility across the full site.
 
 **Prerequisites:** Sprint 11 DoD met. Site has sufficient content volume to meaningfully optimize (all core pages + 5+ briefings + 8+ deployments + downloadable PDFs).
@@ -548,6 +578,7 @@
   - Focus indicators on all interactive elements
 
 **Definition of Done:**
+
 - [ ] Lighthouse scores ≥95 for Performance, Accessibility, Best Practices, SEO on homepage and 3 key inner pages
 - [ ] Core Web Vitals all green in Google Search Console (or verified via lab tools)
 - [ ] All pages have valid structured data (tested with Google Rich Results Test)
@@ -559,6 +590,7 @@
 ---
 
 ### Sprint 13 -- Content Pipeline & Phase 2 Finalization
+
 **Goal:** Establish sustainable content workflow and finalize Phase 2.
 
 **Prerequisites:** Sprint 12 DoD met. Roy has committed to a content publishing rhythm. If additional authors will publish, their Sanity accounts must be created.
@@ -579,6 +611,7 @@
 - [ ] **User acceptance testing** with Roy and team
 
 **Definition of Done:**
+
 - [ ] Written content workflow documentation exists and Roy can follow it independently
 - [ ] 10+ briefings are live on the site
 - [ ] Newsletter has been sent at least once (even to a test list)
@@ -595,6 +628,7 @@
 **Gate Owner:** Roy
 
 **Questions to answer before Phase 3 begins:**
+
 1. Is the Grey Sky Responder Society Glide app operational and ready for inbound traffic from the website?
 2. Does LvSG have deployment stories written or outlined (minimum 3)?
 3. Are there open deployment roles to list, or is the recruiting section aspirational?
@@ -612,6 +646,7 @@
 ---
 
 ### Sprint 14 -- Grey Sky Responder Society Gateway
+
 **Goal:** Build the Society landing page and integration architecture.
 
 **Prerequisites:** Phase Gate 2→3 cleared. Glide app URL confirmed. Tier 1-5 model finalized. Society statistics available (member count, tier distribution) or reasonable estimates approved.
@@ -634,6 +669,7 @@
   - `societyStats` (total members, tier distribution, deployment count)
 
 **Definition of Done:**
+
 - [ ] Society gateway page renders with tier visualization, stats, and credentialing explanation
 - [ ] Utility nav "Grey Sky Responder Portal" links to Glide app login
 - [ ] Apply CTA initiates flow that reaches Glide app enrollment
@@ -645,9 +681,11 @@
 ---
 
 ### Sprint 15 -- Recruiting Section
+
 **Goal:** Build the recruiting/careers section.
 
 **Prerequisites:** Sprint 14 DoD met. Decisions made on:
+
 - Which ICS functional areas have open roles (or aspirational roles)
 - Whether application form routes to email, ATS, or Glide
 - At least 2 current team member profiles approved for publication
@@ -672,6 +710,7 @@
   - Photos from field operations
 
 **Definition of Done:**
+
 - [ ] Recruiting page communicates operational culture, not corporate HR
 - [ ] Open roles display organized by ICS functional area
 - [ ] Onboarding flow is visualized as a clear 5-step process
@@ -683,6 +722,7 @@
 ---
 
 ### Sprint 16 -- Deployment Stories & Community Content
+
 **Goal:** Build the narrative content system for community engagement.
 
 **Prerequisites:** Sprint 15 DoD met. At least 3 deployment stories written (first-person narratives with photos).
@@ -704,6 +744,7 @@
 - [ ] **Social proof elements:** Testimonial component reusable across site
 
 **Definition of Done:**
+
 - [ ] 3 deployment stories published with photos and operational narratives
 - [ ] Stories are linked from Community section and cross-linked from relevant deployment records
 - [ ] Video embed works where video content is available
@@ -715,6 +756,7 @@
 ---
 
 ### Sprint 17 -- Cross-Site Community Integration & Phase 3 QA
+
 **Goal:** Integrate community features site-wide and polish.
 
 **Prerequisites:** Sprint 16 DoD met. Society statistics (member count) confirmed for homepage display.
@@ -733,6 +775,7 @@
 - [ ] **Analytics review:** Conversion funnel analysis, traffic patterns
 
 **Definition of Done:**
+
 - [ ] Homepage status bar displays live (or regularly updated) responder count
 - [ ] Grey Sky integration points are active on: homepage, deployments, case studies, footer
 - [ ] No regressions introduced in Phase 1 or Phase 2 features
@@ -749,6 +792,7 @@
 **Gate Owner:** Roy
 
 **Questions to answer before Phase 4 begins:**
+
 1. Has the site demonstrated traction? (Traffic, inquiries, or partner feedback that validates continued investment)
 2. Is the content pipeline producing at the planned cadence, or is the team capacity-constrained?
 3. Is the national disaster database data sourced and processable?
@@ -766,6 +810,7 @@
 ---
 
 ### Sprint 18 -- Situation Report Live System
+
 **Goal:** Build real-time SitRep publishing capability for active disaster events.
 
 **Prerequisites:** Phase Gate 3→4 cleared. SitRep publishing workflow documented. Decision made on alert distribution (email list, SMS, or both).
@@ -786,6 +831,7 @@
 - [ ] **SitRep archive** with search and filtering
 
 **Definition of Done:**
+
 - [ ] A SitRep can be created, published, updated, and archived entirely through Sanity
 - [ ] Active SitReps display on a dashboard with ICS formatting and map
 - [ ] Subscribers receive email alerts when a new SitRep is published or updated
@@ -797,6 +843,7 @@
 ---
 
 ### Sprint 19 -- National Disaster Database Visualization
+
 **Goal:** Build the county-level disaster data visualization tool.
 
 **Prerequisites:** Sprint 18 DoD met. FEMA disaster declaration dataset obtained and processed. County boundary GeoJSON sourced.
@@ -820,6 +867,7 @@
   - Inspired by EOC dashboard aesthetic per design doc
 
 **Definition of Done:**
+
 - [ ] Choropleth map renders all U.S. counties with color coding
 - [ ] Clicking any county shows disaster history
 - [ ] Filters function for disaster type, year range, and declaration type
@@ -831,6 +879,7 @@
 ---
 
 ### Sprint 20 -- Historical Deployment Archive & Data Dashboards
+
 **Goal:** Build comprehensive deployment archive and interactive data displays.
 
 **Prerequisites:** Sprint 19 DoD met. All historical deployment data entered in Sanity (every deployment since 2005). Photos and team rosters gathered where available.
@@ -850,6 +899,7 @@
 - [ ] **Cross-linking:** Deployments ↔ Case Studies ↔ Services ↔ Programs
 
 **Definition of Done:**
+
 - [ ] Every LvSG deployment since 2005 has a record in the archive
 - [ ] Data dashboards display deployment statistics with EOC-aesthetic charts
 - [ ] Cross-linking works: clicking a service shows related deployments, clicking a deployment links to its case study (if any)
@@ -860,6 +910,7 @@
 ---
 
 ### Sprint 21 -- Conference & Media Systems
+
 **Goal:** Build the speaking request and media systems.
 
 **Prerequisites:** Sprint 20 DoD met. Roy's speaking topic list finalized. Media kit assets (photos, logos, boilerplate) gathered.
@@ -882,6 +933,7 @@
   - Upcoming events
 
 **Definition of Done:**
+
 - [ ] Speaking request form submits and routes correctly
 - [ ] Media kit page offers downloadable packages (photos, logos, bios)
 - [ ] Press release archive displays with search and filtering
@@ -892,6 +944,7 @@
 ---
 
 ### Sprint 22 -- Site-Wide Polish & Micro-Interactions
+
 **Goal:** Elevate the site from functional to premium.
 
 **Prerequisites:** Sprint 21 DoD met. All content sections are live and populated. This sprint is purely enhancement -- no new features.
@@ -911,6 +964,7 @@
 - [ ] **Print stylesheets** for key pages (capability statements, case studies)
 
 **Definition of Done:**
+
 - [ ] Animations are smooth (60fps) and do not impact page load performance
 - [ ] Animations respect `prefers-reduced-motion` accessibility setting
 - [ ] Lighthouse performance score remains ≥90 with animations active
@@ -921,6 +975,7 @@
 ---
 
 ### Sprint 23 -- Phase 4 Hardening & Final QA
+
 **Goal:** Final quality assurance, security hardening, and production readiness.
 
 **Prerequisites:** Sprint 22 DoD met. No known critical bugs.
@@ -949,6 +1004,7 @@
 - [ ] **Documentation:** Admin guide for Sanity CMS, deployment procedures
 
 **Definition of Done:**
+
 - [ ] Zero critical or high-severity bugs
 - [ ] All pages pass cross-browser testing
 - [ ] WCAG 2.1 AA compliance verified
@@ -960,14 +1016,14 @@
 
 **Decision Gate -- PHASE 4 COMPLETE:** Full stakeholder review. The platform is evaluated as a complete Digital Operations Platform:
 
-| Capability | Status | Verdict |
-|-----------|--------|---------|
-| Core site (Company, Capabilities, Ops, Gov, Contact) | ☐ Operational | ☐ Pass |
-| Content engine (Briefings, White Papers, SitReps) | ☐ Operational | ☐ Pass |
-| Community (Grey Sky, Recruiting, Stories) | ☐ Operational | ☐ Pass |
-| Intelligence (Disaster DB, Data Dashboards) | ☐ Operational | ☐ Pass |
-| Search, SEO, Performance, Accessibility | ☐ Verified | ☐ Pass |
-| Content pipeline sustainable without developer | ☐ Confirmed | ☐ Pass |
+| Capability                                           | Status        | Verdict |
+| ---------------------------------------------------- | ------------- | ------- |
+| Core site (Company, Capabilities, Ops, Gov, Contact) | ☐ Operational | ☐ Pass  |
+| Content engine (Briefings, White Papers, SitReps)    | ☐ Operational | ☐ Pass  |
+| Community (Grey Sky, Recruiting, Stories)            | ☐ Operational | ☐ Pass  |
+| Intelligence (Disaster DB, Data Dashboards)          | ☐ Operational | ☐ Pass  |
+| Search, SEO, Performance, Accessibility              | ☐ Verified    | ☐ Pass  |
+| Content pipeline sustainable without developer       | ☐ Confirmed   | ☐ Pass  |
 
 **All must pass.** This gate marks the platform as feature-complete for Year 1.
 
@@ -981,6 +1037,7 @@
 **This is the most significant gate.** Phase 5 represents a fundamentally different capability -- authenticated portals, real-time tracking, API integrations -- that requires sustained development resources.
 
 **Questions to answer before Phase 5 begins:**
+
 1. Has the site generated measurable business results? (Contracts, partnerships, or recruitment attributable to the platform)
 2. Does LvSG have active client engagements that would benefit from a portal?
 3. Is the Grey Sky Responder Society at sufficient scale to justify API integration?
@@ -999,6 +1056,7 @@
 ---
 
 ### Sprint 24 -- Client Portal Foundation
+
 **Goal:** Build authenticated client portal for engagement management.
 
 **Prerequisites:** Phase Gate 4→5 cleared. Authentication approach decided (NextAuth.js with magic links vs. SSO vs. other). At least 1 active client engagement that will use the portal. Data schema for engagement tracking designed.
@@ -1010,6 +1068,7 @@
 - [ ] **Client onboarding flow**
 
 **Definition of Done:**
+
 - [ ] Authenticated users can log in and see their engagement dashboard
 - [ ] Documents can be securely uploaded and downloaded
 - [ ] Role-based access prevents unauthorized data access
@@ -1020,6 +1079,7 @@
 ---
 
 ### Sprint 25 -- Responder Deployment Tracking
+
 **Goal:** Build internal deployment tracking dashboard.
 
 **Prerequisites:** Sprint 24 DoD met. Grey Sky Responder Society API capabilities assessed. Decision made on FEMA IPAWS / NWS alert integration scope.
@@ -1030,6 +1090,7 @@
 - [ ] **Deployment notification system**
 
 **Definition of Done:**
+
 - [ ] Responder availability and assignment status visible in dashboard
 - [ ] Disaster monitoring alerts display for active events
 - [ ] Deployment notifications reach designated personnel
@@ -1040,6 +1101,7 @@
 ---
 
 ### Sprint 26 -- Advanced Analytics, Reporting & Year 2 Planning
+
 **Goal:** Build analytics capabilities and define the roadmap forward.
 
 **Prerequisites:** Sprint 25 DoD met. 6+ months of analytics data available for analysis.
@@ -1054,12 +1116,14 @@
 - [ ] **Year 2 roadmap development** based on data and stakeholder priorities
 
 **Definition of Done:**
+
 - [ ] Analytics dashboards display actionable insights on traffic, conversions, and content performance
 - [ ] Monthly report generates automatically
 - [ ] A/B testing framework is operational for at least 1 CTA experiment
 - [ ] Year 2 roadmap document is drafted with data-informed priorities
 
 **Decision Gate -- PHASE 5 MILESTONE:** Roy reviews analytics and Year 2 roadmap. Decides priorities for continued development:
+
 - Mobile app for deployed teams?
 - Expanded client portal features?
 - Integration with government procurement systems?
@@ -1071,72 +1135,72 @@ The platform is now a living system. Future development follows the same decisio
 
 ## Sprint Sequence Summary
 
-| Sprint | Name | Advances When |
-|--------|------|--------------|
-| **0** | Project Setup & Infrastructure | Developer confirms all infrastructure operational |
-| **1** | Design System & Core Layout | Roy approves site shell visual identity |
-| **2** | Homepage: Hero, Status Bar, Mission | Roy confirms "30-second authority test" passes |
-| **3** | Homepage: Capabilities, Ops, Gov | Roy confirms homepage answers "Can they?" and "Have they?" |
-| **4** | Homepage Complete + CMS Schemas | Roy signs off on complete homepage story |
-| **5** | Company Section Pages | Roy verifies factual accuracy and "built in the field" tone |
-| **6** | Capabilities & Government Pages | Roy confirms contracting officer "60-second qualification test" |
-| **7** | Operations, Contact & Launch Prep | **PHASE 1 LAUNCH:** All 5 government evaluator questions pass |
-| | **◆ PHASE GATE 1→2** | Roy authorizes content engine investment |
-| **8** | Intel: Briefings Infrastructure | Roy publishes a test briefing end-to-end |
-| **9** | SitReps, White Papers & Newsletter | Roy confirms Intel section establishes thought leadership |
-| **10** | Search & Map Interactivity | Search returns useful results for 8/10 test queries |
-| **11** | PDF Downloads & Document System | Roy verifies all downloads are current and professional |
-| **12** | SEO & Performance Optimization | Lighthouse ≥95 and WCAG AA compliance verified |
-| **13** | Content Pipeline & Phase 2 Polish | **PHASE 2 COMPLETE:** Roy publishes independently |
-| | **◆ PHASE GATE 2→3** | Roy authorizes community launch; Glide app ready |
-| **14** | Grey Sky Responder Society Gateway | Roy confirms Society brand accuracy |
-| **15** | Recruiting Section | Roy confirms recruiting speaks to seasoned responders |
-| **16** | Deployment Stories | Roy verifies story accuracy; team members approve |
-| **17** | Cross-Site Integration & QA | **PHASE 3 COMPLETE:** Community integrated site-wide |
-| | **◆ PHASE GATE 3→4** | Roy evaluates site traction and authorizes intelligence build |
-| **18** | Situation Report Live System | Roy publishes mock SitRep in <10 minutes |
-| **19** | National Disaster Database | Roy verifies county data accuracy on 5 known counties |
-| **20** | Deployment Archive & Dashboards | Roy confirms comprehensive operational history |
-| **21** | Conference & Media Systems | Roy tests speaking request and media kit |
-| **22** | Site-Wide Polish | Team confirms "EOC aesthetic" achieved |
-| **23** | Phase 4 Hardening & Final QA | **PHASE 4 COMPLETE:** Full platform evaluation passes |
-| | **◆ PHASE GATE 4→5** | Roy makes operations center investment decision |
-| **24** | Client Portal Foundation | Roy + pilot client validate portal value |
-| **25** | Responder Deployment Tracking | Operations team validates in real/exercise scenario |
-| **26** | Analytics & Year 2 Planning | **Year 2 roadmap defined** from data |
+| Sprint | Name                                | Advances When                                                   |
+| ------ | ----------------------------------- | --------------------------------------------------------------- |
+| **0**  | Project Setup & Infrastructure      | Developer confirms all infrastructure operational               |
+| **1**  | Design System & Core Layout         | Roy approves site shell visual identity                         |
+| **2**  | Homepage: Hero, Status Bar, Mission | Roy confirms "30-second authority test" passes                  |
+| **3**  | Homepage: Capabilities, Ops, Gov    | Roy confirms homepage answers "Can they?" and "Have they?"      |
+| **4**  | Homepage Complete + CMS Schemas     | Roy signs off on complete homepage story                        |
+| **5**  | Company Section Pages               | Roy verifies factual accuracy and "built in the field" tone     |
+| **6**  | Capabilities & Government Pages     | Roy confirms contracting officer "60-second qualification test" |
+| **7**  | Operations, Contact & Launch Prep   | **PHASE 1 LAUNCH:** All 5 government evaluator questions pass   |
+|        | **◆ PHASE GATE 1→2**                | Roy authorizes content engine investment                        |
+| **8**  | Intel: Briefings Infrastructure     | Roy publishes a test briefing end-to-end                        |
+| **9**  | SitReps, White Papers & Newsletter  | Roy confirms Intel section establishes thought leadership       |
+| **10** | Search & Map Interactivity          | Search returns useful results for 8/10 test queries             |
+| **11** | PDF Downloads & Document System     | Roy verifies all downloads are current and professional         |
+| **12** | SEO & Performance Optimization      | Lighthouse ≥95 and WCAG AA compliance verified                  |
+| **13** | Content Pipeline & Phase 2 Polish   | **PHASE 2 COMPLETE:** Roy publishes independently               |
+|        | **◆ PHASE GATE 2→3**                | Roy authorizes community launch; Glide app ready                |
+| **14** | Grey Sky Responder Society Gateway  | Roy confirms Society brand accuracy                             |
+| **15** | Recruiting Section                  | Roy confirms recruiting speaks to seasoned responders           |
+| **16** | Deployment Stories                  | Roy verifies story accuracy; team members approve               |
+| **17** | Cross-Site Integration & QA         | **PHASE 3 COMPLETE:** Community integrated site-wide            |
+|        | **◆ PHASE GATE 3→4**                | Roy evaluates site traction and authorizes intelligence build   |
+| **18** | Situation Report Live System        | Roy publishes mock SitRep in <10 minutes                        |
+| **19** | National Disaster Database          | Roy verifies county data accuracy on 5 known counties           |
+| **20** | Deployment Archive & Dashboards     | Roy confirms comprehensive operational history                  |
+| **21** | Conference & Media Systems          | Roy tests speaking request and media kit                        |
+| **22** | Site-Wide Polish                    | Team confirms "EOC aesthetic" achieved                          |
+| **23** | Phase 4 Hardening & Final QA        | **PHASE 4 COMPLETE:** Full platform evaluation passes           |
+|        | **◆ PHASE GATE 4→5**                | Roy makes operations center investment decision                 |
+| **24** | Client Portal Foundation            | Roy + pilot client validate portal value                        |
+| **25** | Responder Deployment Tracking       | Operations team validates in real/exercise scenario             |
+| **26** | Analytics & Year 2 Planning         | **Year 2 roadmap defined** from data                            |
 
 ---
 
 ## Team Recommendations
 
-| Role | Phase 1 | Phase 2-3 | Phase 4-5 |
-|------|---------|-----------|-----------|
-| Lead Full-Stack Developer (Next.js) | Required | Required | Required |
-| UI/UX Designer | Required | As needed | As needed |
-| Sanity CMS / Content Developer | Required | Required | Required |
-| DevOps / Infrastructure | Sprint 0 + as needed | As needed | As needed |
-| Content Writer / Editor | Sprint 5+ | Required | Required |
-| QA / Testing | Sprint 7 | Sprint 13, 17 | Sprint 23 |
-| Mapbox / Data Visualization Dev | Sprint 3 | Sprint 10 | Sprint 19-20 |
+| Role                                | Phase 1              | Phase 2-3     | Phase 4-5    |
+| ----------------------------------- | -------------------- | ------------- | ------------ |
+| Lead Full-Stack Developer (Next.js) | Required             | Required      | Required     |
+| UI/UX Designer                      | Required             | As needed     | As needed    |
+| Sanity CMS / Content Developer      | Required             | Required      | Required     |
+| DevOps / Infrastructure             | Sprint 0 + as needed | As needed     | As needed    |
+| Content Writer / Editor             | Sprint 5+            | Required      | Required     |
+| QA / Testing                        | Sprint 7             | Sprint 13, 17 | Sprint 23    |
+| Mapbox / Data Visualization Dev     | Sprint 3             | Sprint 10     | Sprint 19-20 |
 
 ---
 
 ## Risk Register
 
-| Risk | Impact | Mitigation |
-|------|--------|-----------|
-| Content not ready at a decision gate | Sprint blocked until content arrives | Define minimum viable content per sprint; surface content dependencies 2 sprints early; Roy identifies content as the critical path |
-| Roy unavailable for decision gate review | Sprint cannot advance | Delegate gate authority for technical gates to a designated reviewer; Roy retains authority on brand/content/strategy gates |
-| Mapbox complexity exceeds estimate | Sprint 3 extends | Static map fallback for Phase 1; interactive map deferred to Sprint 10 |
-| Sanity schema changes after content is entered | Data migration required | Design schemas with extensibility from Sprint 4; use Sanity's migration tools; avoid breaking changes |
-| Photography/imagery not available | Pages launch with gaps | Source field-appropriate stock as placeholder; tag for replacement; do not hold a gate for placeholder images |
-| Grey Sky Glide app not ready at Phase Gate 2→3 | Phase 3 blocked or launches incomplete | Design Society integration as one-way links; "Coming Soon" enrollment is acceptable for gate passage |
-| Traffic spikes during active disasters | Performance degradation | Vercel edge caching + static generation handles architecturally; load test before hurricane season |
-| SEO takes months to build authority | Not a blocker, but requires patience | Begin content publishing immediately after Phase 1 launch; target long-tail keywords first; set expectations that organic traffic builds over 6-12 months |
-| Phase Gate 4→5 results in "defer" decision | Phase 5 not built | This is a feature, not a bug -- the gate exists precisely to prevent building capabilities the org doesn't yet need |
+| Risk                                           | Impact                                 | Mitigation                                                                                                                                                |
+| ---------------------------------------------- | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Content not ready at a decision gate           | Sprint blocked until content arrives   | Define minimum viable content per sprint; surface content dependencies 2 sprints early; Roy identifies content as the critical path                       |
+| Roy unavailable for decision gate review       | Sprint cannot advance                  | Delegate gate authority for technical gates to a designated reviewer; Roy retains authority on brand/content/strategy gates                               |
+| Mapbox complexity exceeds estimate             | Sprint 3 extends                       | Static map fallback for Phase 1; interactive map deferred to Sprint 10                                                                                    |
+| Sanity schema changes after content is entered | Data migration required                | Design schemas with extensibility from Sprint 4; use Sanity's migration tools; avoid breaking changes                                                     |
+| Photography/imagery not available              | Pages launch with gaps                 | Source field-appropriate stock as placeholder; tag for replacement; do not hold a gate for placeholder images                                             |
+| Grey Sky Glide app not ready at Phase Gate 2→3 | Phase 3 blocked or launches incomplete | Design Society integration as one-way links; "Coming Soon" enrollment is acceptable for gate passage                                                      |
+| Traffic spikes during active disasters         | Performance degradation                | Vercel edge caching + static generation handles architecturally; load test before hurricane season                                                        |
+| SEO takes months to build authority            | Not a blocker, but requires patience   | Begin content publishing immediately after Phase 1 launch; target long-tail keywords first; set expectations that organic traffic builds over 6-12 months |
+| Phase Gate 4→5 results in "defer" decision     | Phase 5 not built                      | This is a feature, not a bug -- the gate exists precisely to prevent building capabilities the org doesn't yet need                                       |
 
 ---
 
-*Plan version 2.0 -- March 2026*
-*Methodology: Decision-gated, milestone-driven*
-*Aligned to LvSG Digital Operations Platform Architecture v1.0*
+_Plan version 2.0 -- March 2026_
+_Methodology: Decision-gated, milestone-driven_
+_Aligned to LvSG Digital Operations Platform Architecture v1.0_
