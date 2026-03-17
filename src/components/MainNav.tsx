@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
@@ -14,7 +15,7 @@ const navItems = [
     ],
   },
   {
-    label: 'CAPABILITIES',
+    label: 'SERVICE LINES',
     href: '/capabilities',
     dropdown: [
       { label: 'Services', href: '/capabilities/services' },
@@ -72,6 +73,7 @@ const navItems = [
 export function MainNav() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const [expandedMobile, setExpandedMobile] = useState<string | null>(null);
 
   return (
     <nav
@@ -80,10 +82,15 @@ export function MainNav() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2">
-          <span className="font-display text-xl font-bold tracking-tight text-command-navy">
-            LONGVIEW SOLUTIONS GROUP
-          </span>
+        <Link href="/" className="flex shrink-0 items-center">
+          <Image
+            src="/lvsg-logo-navy.png"
+            alt="Longview Solutions Group"
+            width={266}
+            height={120}
+            className="h-10 w-auto sm:h-11 lg:h-14"
+            priority
+          />
         </Link>
 
         {/* Desktop Nav */}
@@ -152,21 +159,44 @@ export function MainNav() {
         </button>
       </div>
 
-      {/* Mobile menu */}
+      {/* Mobile menu — accordion style to reduce scroll depth */}
       {mobileOpen && (
-        <div className="border-t border-light-gray bg-clean-white lg:hidden">
-          <div className="mx-auto max-w-7xl px-4 py-4">
+        <div className="max-h-[80vh] overflow-y-auto border-t border-light-gray bg-clean-white lg:hidden">
+          <div className="mx-auto max-w-7xl px-4 py-3">
             {navItems.map((item) => (
-              <div key={item.label} className="border-b border-light-gray py-2 last:border-b-0">
-                <Link
-                  href={item.href}
-                  className="text-dark-charcoal block py-2 text-sm font-semibold tracking-wide"
-                  onClick={() => setMobileOpen(false)}
+              <div key={item.label} className="border-b border-light-gray last:border-b-0">
+                <button
+                  type="button"
+                  className="flex w-full items-center justify-between py-3 text-sm font-semibold tracking-wide text-dark-charcoal"
+                  onClick={() =>
+                    setExpandedMobile(expandedMobile === item.label ? null : item.label)
+                  }
+                  aria-expanded={expandedMobile === item.label}
                 >
                   {item.label}
-                </Link>
-                {item.dropdown && (
-                  <div className="ml-4">
+                  <svg
+                    className={`h-4 w-4 text-medium-gray transition-transform ${expandedMobile === item.label ? 'rotate-180' : ''}`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
+                  </svg>
+                </button>
+                {expandedMobile === item.label && item.dropdown && (
+                  <div className="ml-4 pb-2">
+                    <Link
+                      href={item.href}
+                      className="text-dark-charcoal hover:text-signal-gold block py-1.5 text-sm font-medium transition-colors"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      Overview
+                    </Link>
                     {item.dropdown.map((sub) => (
                       <Link
                         key={sub.href}
@@ -183,7 +213,7 @@ export function MainNav() {
             ))}
             <Link
               href="/contact/consultation"
-              className="bg-signal-gold mt-4 block rounded px-5 py-2.5 text-center text-sm font-bold tracking-wide text-clean-white"
+              className="bg-signal-gold mt-3 block rounded px-5 py-2.5 text-center text-sm font-bold tracking-wide text-clean-white"
               onClick={() => setMobileOpen(false)}
             >
               REQUEST CONSULTATION

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 const footerSections = [
@@ -10,7 +11,7 @@ const footerSections = [
     ],
   },
   {
-    title: 'Capabilities',
+    title: 'Service Lines',
     links: [
       { label: 'Services', href: '/capabilities/services' },
       { label: 'Programs', href: '/capabilities/programs' },
@@ -42,12 +43,16 @@ export function Footer() {
       {/* Main footer content */}
       <div className="mx-auto max-w-7xl px-4 py-12">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-5">
-          {/* Brand column */}
+          {/* Brand column — more prominent per reviewer feedback */}
           <div className="lg:col-span-1">
-            <span className="font-display text-lg font-bold tracking-tight">
-              LONGVIEW SOLUTIONS GROUP
-            </span>
-            <p className="text-medium-gray mt-3 text-sm leading-relaxed">
+            <Image
+              src="/lvsg-logo-navy.png"
+              alt="Longview Solutions Group"
+              width={200}
+              height={90}
+              className="h-12 w-auto brightness-0 invert"
+            />
+            <p className="mt-4 text-sm leading-relaxed text-light-gray">
               Strategic Capability.
               <br />
               Operational Deployment.
@@ -71,7 +76,7 @@ export function Footer() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-medium-gray hover:text-warm-gold-light text-sm transition-colors"
+                      className="text-light-gray hover:text-warm-gold-light text-sm transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -86,10 +91,10 @@ export function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-steel-blue">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-4 sm:flex-row">
-          <p className="text-medium-gray text-xs">
+          <p className="text-xs text-light-gray/70">
             &copy; {new Date().getFullYear()} Longview Solutions Group LLC. All rights reserved.
           </p>
-          <p className="font-display text-warm-gold-light text-xs italic tracking-wide">
+          <p className="font-display text-base italic tracking-wide text-warm-gold-light">
             &ldquo;Vigilance. Perseverance. Justice.&rdquo;
           </p>
         </div>

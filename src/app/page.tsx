@@ -12,7 +12,7 @@ export default function Home() {
           <p className="font-display mt-4 text-xl font-semibold text-signal-gold lg:text-2xl">
             Strategic Capability. Operational Deployment. National Reach.
           </p>
-          <p className="mt-6 text-lg text-medium-gray">
+          <p className="mt-6 text-lg text-light-gray lg:text-xl">
             We don&apos;t write reports about disasters. We deploy to them.
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -34,13 +34,41 @@ export default function Home() {
         <div className="bg-signal-gold absolute bottom-0 left-0 right-0 h-1" />
       </section>
 
-      {/* Operational Status Bar */}
-      <section className="bg-steel-blue px-4 py-5">
-        <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-8 text-center lg:justify-between">
-          <StatusMetric value="3" label="Active Missions" />
-          <StatusMetric value="12" label="States Served" />
-          <StatusMetric value="150+" label="Responders Credentialed" />
-          <StatusMetric value="20+" label="Years of Operations" />
+      {/* Operational Status Bar — telemetry styling with monospace */}
+      <section className="bg-steel-blue px-4 py-6">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-3 flex items-center justify-center gap-2">
+            <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-green-400" />
+            <span className="font-mono text-xs font-medium uppercase tracking-widest text-light-gray">
+              Operational Status
+            </span>
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-8 text-center lg:justify-between">
+            <StatusMetric value="3" label="Active Missions" />
+            <StatusMetric value="12" label="States Served" />
+            <StatusMetric value="150+" label="Responders Credentialed" />
+            <StatusMetric value="20+" label="Years of Operations" />
+          </div>
+        </div>
+      </section>
+
+      {/* Contract Vehicles Bar — pulled up per Pettus feedback for procurement audience */}
+      <section className="border-b border-light-gray bg-clean-white px-4 py-4">
+        <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-6 text-center font-mono text-xs tracking-wide text-operational-steel">
+          <span className="flex items-center gap-1.5">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-signal-gold" />
+            SAM.gov Registered
+          </span>
+          <span className="text-light-gray">|</span>
+          <span className="flex items-center gap-1.5">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-signal-gold" />
+            FL DMS State Term Contract
+          </span>
+          <span className="text-light-gray">|</span>
+          <span className="flex items-center gap-1.5">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-signal-gold" />
+            NIMS / ICS / HSEEP Compliant
+          </span>
         </div>
       </section>
 
@@ -59,37 +87,37 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Capabilities Preview */}
+      {/* Service Lines (renamed from Capabilities per Pettus feedback) */}
       <section className="bg-light-gray px-4 py-20">
         <div className="mx-auto max-w-6xl">
           <h2 className="font-display text-command-navy text-center text-3xl font-bold">
-            CAPABILITIES
+            SERVICE LINES
           </h2>
-          <p className="text-medium-gray mt-2 text-center text-lg">
+          <p className="text-dark-charcoal mt-2 text-center text-base">
             From strategic planning to boots on the ground.
           </p>
           <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <CapabilityCard
+            <ServiceCard
               title="Incident Management Teams"
               description="Trained, credentialed IMTs deployable within 24-72 hours to any jurisdiction in the nation."
             />
-            <CapabilityCard
+            <ServiceCard
               title="EOC Management"
               description="Full EOC staffing, activation support, and operational management for state and local governments."
             />
-            <CapabilityCard
+            <ServiceCard
               title="Disaster Housing Operations"
               description="End-to-end housing mission management from needs assessment through unit placement and closeout."
             />
-            <CapabilityCard
+            <ServiceCard
               title="Strategic Resilience Planning"
               description="Long-range capability development, COOP planning, and community resilience strategy."
             />
-            <CapabilityCard
+            <ServiceCard
               title="Exercise Design & Evaluation"
               description="HSEEP-compliant exercises that test real capability, not just check compliance boxes."
             />
-            <CapabilityCard
+            <ServiceCard
               title="National Security & Expeditionary Ops"
               description="Specialized capability development for defense and intelligence community requirements."
             />
@@ -103,7 +131,7 @@ export default function Home() {
           <h2 className="font-display text-command-navy text-center text-3xl font-bold">
             GOVERNMENT READY
           </h2>
-          <p className="text-medium-gray mt-2 text-center text-lg">
+          <p className="text-dark-charcoal mt-2 text-center text-base">
             Contract-ready. Compliance-verified. Deployment-proven.
           </p>
           <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-3">
@@ -135,7 +163,7 @@ export default function Home() {
       <section className="bg-command-navy px-4 py-20 text-center">
         <div className="mx-auto max-w-3xl">
           <h2 className="font-display text-3xl font-bold text-clean-white">JOIN THE MISSION</h2>
-          <p className="text-medium-gray mt-4 text-lg leading-relaxed">
+          <p className="mt-4 text-lg leading-relaxed text-light-gray">
             LvSG is building the next generation of deployable disaster capability. If you&apos;ve
             served in the field&mdash;if you&apos;ve managed the impossible&mdash;we want to talk to
             you.
@@ -163,18 +191,19 @@ export default function Home() {
 function StatusMetric({ value, label }: { value: string; label: string }) {
   return (
     <div>
-      <span className="font-mono text-2xl font-bold text-signal-gold">{value}</span>
-      <p className="mt-1 text-xs uppercase tracking-widest text-medium-gray">{label}</p>
+      <span className="font-mono text-3xl font-bold tabular-nums text-signal-gold">{value}</span>
+      <p className="mt-1 font-mono text-[10px] uppercase tracking-widest text-light-gray">
+        {label}
+      </p>
     </div>
   );
 }
 
-function CapabilityCard({ title, description }: { title: string; description: string }) {
+function ServiceCard({ title, description }: { title: string; description: string }) {
   return (
     <div className="rounded-md border border-light-gray bg-clean-white p-6 transition-shadow hover:shadow-md">
       <h3 className="font-display text-command-navy text-lg font-bold">{title}</h3>
       <p className="text-dark-charcoal mt-2 text-sm leading-relaxed">{description}</p>
-      <span className="text-signal-gold mt-4 inline-block text-sm font-medium">Learn More →</span>
     </div>
   );
 }

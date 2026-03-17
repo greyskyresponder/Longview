@@ -1,16 +1,16 @@
 @import 'tailwindcss';
 
 :root {
-  /* LvSG Brand Colors */
+  /* LvSG Brand Colors — adjusted for contrast per review feedback */
   --color-command-navy: #0a1628;
   --color-steel-blue: #1b2b45;
   --color-operational-steel: #2c3e5a;
   --color-signal-gold: #c5933a;
   --color-warm-gold-light: #f5e6c8;
   --color-clean-white: #ffffff;
-  --color-light-gray: #f0f2f5;
+  --color-light-gray: #e4e7ec; /* bumped from #f0f2f5 for better contrast on white */
   --color-medium-gray: #8b95a5;
-  --color-dark-charcoal: #3a4555;
+  --color-dark-charcoal: #2a3240; /* darkened from #3a4555 for better readability */
   --color-alert-red: #b53b2e;
 
   --background: var(--color-clean-white);
@@ -41,4 +41,6 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
+  font-size: 16px; /* explicit base — Pettus requested larger body text */
+  line-height: 1.6;
 }

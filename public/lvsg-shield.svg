@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 56" fill="none">
+  <!-- Shield shape -->
+  <path d="M24 2L4 12v16c0 14 10 22 20 26 10-4 20-12 20-26V12L24 2z" fill="#0A1628" stroke="#C5933A" stroke-width="1.5"/>
+  <!-- Inner border -->
+  <path d="M24 6L8 14v13c0 12 8 19 16 22 8-3 16-10 16-22V14L24 6z" fill="none" stroke="#C5933A" stroke-width="0.75" opacity="0.5"/>
+  <!-- LvSG monogram -->
+  <text x="24" y="30" text-anchor="middle" font-family="Georgia, serif" font-size="11" font-weight="bold" fill="#C5933A" letter-spacing="0.5">LvSG</text>
+  <!-- Bottom accent line -->
+  <line x1="14" y1="36" x2="34" y2="36" stroke="#C5933A" stroke-width="0.75"/>
+  <!-- Star -->
+  <polygon points="24,39 25.5,42 28.5,42 26,44 27,47 24,45 21,47 22,44 19.5,42 22.5,42" fill="#C5933A" opacity="0.8"/>
+</svg>
