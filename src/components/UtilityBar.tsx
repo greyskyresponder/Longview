@@ -30,10 +30,10 @@ export function UtilityBar() {
         </div>
         <div className="flex items-center gap-4">
           <a
-            href="tel:+1XXXXXXXXXX"
+            href="tel:+18046835780"
             className="text-signal-gold font-mono font-medium tracking-wide"
           >
-            24/7 Deployment Line: (850) 000-0000
+            24/7 Deployment Line: (804) 683-5780
           </a>
           <span className="hidden text-operational-steel sm:inline">|</span>
           <button

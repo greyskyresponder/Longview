@@ -13,9 +13,10 @@ const footerSections = [
   {
     title: 'Service Lines',
     links: [
-      { label: 'Services', href: '/capabilities/services' },
+      { label: 'Services Overview', href: '/capabilities/services' },
+      { label: 'Specialty Response Teams', href: '/capabilities/srt' },
+      { label: 'Grey Sky Travel', href: '/capabilities/grey-sky-travel' },
       { label: 'Programs', href: '/capabilities/programs' },
-      { label: 'Methodology', href: '/capabilities/methodology' },
     ],
   },
   {
@@ -31,8 +32,8 @@ const footerSections = [
     links: [
       { label: 'Request Consultation', href: '/contact/consultation' },
       { label: 'Teaming Opportunities', href: '/contact/teaming' },
-      { label: 'Media & Speaking', href: '/contact/media' },
       { label: 'Grey Sky Responder Portal', href: '/community/grey-sky-responder-society' },
+      { label: '(804) 683-5780', href: 'tel:+18046835780' },
     ],
   },
 ];

@@ -18,7 +18,9 @@ const navItems = [
     label: 'SERVICE LINES',
     href: '/capabilities',
     dropdown: [
-      { label: 'Services', href: '/capabilities/services' },
+      { label: 'Services Overview', href: '/capabilities/services' },
+      { label: 'Specialty Response Teams', href: '/capabilities/srt' },
+      { label: 'Grey Sky Travel', href: '/capabilities/grey-sky-travel' },
       { label: 'Programs', href: '/capabilities/programs' },
       { label: 'Methodology & Standards', href: '/capabilities/methodology' },
     ],

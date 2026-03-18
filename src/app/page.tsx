@@ -10,10 +10,11 @@ export default function Home() {
             LONGVIEW SOLUTIONS GROUP
           </h1>
           <p className="font-display mt-4 text-xl font-semibold text-signal-gold lg:text-2xl">
-            Strategic Capability. Operational Deployment. National Reach.
+            Crisis Leadership. Deployed.
           </p>
-          <p className="mt-6 text-lg text-light-gray lg:text-xl">
-            We don&apos;t write reports about disasters. We deploy to them.
+          <p className="mt-6 max-w-2xl mx-auto text-lg leading-relaxed text-light-gray lg:text-xl">
+            We don&apos;t write reports about disasters. We staff the EOC, deploy the teams, and
+            manage the mission&mdash;start to finish.
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
@@ -79,10 +80,12 @@ export default function Home() {
             Our Mission
           </h2>
           <p className="font-display text-dark-charcoal text-xl leading-relaxed italic lg:text-2xl">
-            Longview Solutions Group builds, deploys, and sustains disaster response capability for
-            the governments and communities that need it most. Grounded in faith, driven by valor,
-            and guided by the conviction that every community deserves expert crisis
-            leadership&mdash;not after the report is written, but while the storm is still overhead.
+            We are more than an emergency management provider&mdash;we are your dedicated support
+            team in building resilience. Longview Solutions Group builds, deploys, and sustains
+            disaster response capability for the governments and communities that need it most.
+            Grounded in faith, driven by valor, and guided by the conviction that every community
+            deserves expert crisis leadership&mdash;standing by your side, not after the report is
+            written, but while the storm is still overhead.
           </p>
         </div>
       </section>
@@ -108,6 +111,18 @@ export default function Home() {
             <ServiceCard
               title="Disaster Housing Operations"
               description="End-to-end housing mission management from needs assessment through unit placement and closeout."
+            />
+            <ServiceCard
+              title="Specialty Response Teams"
+              description="Scalable, mission-ready SRT units for state and local deployment. Includes Florida SRT CAP operations."
+            />
+            <ServiceCard
+              title="Human Services"
+              description="Disaster case management, individual assistance programs, and community recovery support for impacted populations."
+            />
+            <ServiceCard
+              title="Grey Sky Travel"
+              description="Managed travel and logistics for deployed responders — housing, transport, and per diem coordination at operational tempo."
             />
             <ServiceCard
               title="Strategic Resilience Planning"
