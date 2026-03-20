@@ -1,26 +1,241 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { sanityFetch } from '@/sanity/lib/fetch';
+import {
+  statusBarQuery,
+  featuredDeploymentsQuery,
+  servicesQuery,
+  programsQuery,
+} from '@/sanity/lib/queries';
+import {
+  Shield,
+  Radio,
+  Home as HomeIcon,
+  Users,
+  Heart,
+  Plane,
+  Target,
+  ClipboardList,
+  Lock,
+} from 'lucide-react';
 
-export default function Home() {
+/* ── Icon map for service lines ── */
+const serviceIconMap: Record<string, React.ElementType> = {
+  'Incident Management Teams': Shield,
+  'EOC Management': Radio,
+  'Disaster Housing Operations': HomeIcon,
+  'Specialty Response Teams': Users,
+  'Human Services': Heart,
+  'Grey Sky Travel': Plane,
+  'Strategic Resilience Planning': Target,
+  'Exercise Design & Evaluation': ClipboardList,
+  'National Security & Expeditionary Ops': Lock,
+};
+
+/* ── Sanity types ── */
+interface StatusBarData {
+  activeMissions?: number;
+  statesServed?: number;
+  respondersCredentialed?: string;
+  yearsOfOperations?: string;
+  watchStatus?: string;
+}
+
+interface DeploymentData {
+  _id: string;
+  name: string;
+  disasterType?: string;
+  jurisdiction: string;
+  state?: string;
+  role: string;
+  teamSize: number;
+  outcome?: string;
+  startDate?: string;
+  endDate?: string;
+  status: string;
+  coordinates?: { lat: number; lng: number };
+}
+
+interface ServiceData {
+  _id: string;
+  title: string;
+  description: string;
+  slug?: { current: string };
+  icon?: string;
+  esfAlignment?: string;
+}
+
+interface ProgramData {
+  _id: string;
+  name: string;
+  slug?: { current: string };
+  description: string;
+  teamStructure?: string;
+  status: string;
+}
+
+/* ── Hardcoded fallbacks ── */
+const fallbackStatusBar: StatusBarData = {
+  activeMissions: 3,
+  statesServed: 12,
+  respondersCredentialed: '150+',
+  yearsOfOperations: '20+',
+  watchStatus: 'QUIET',
+};
+
+const fallbackDeployments: DeploymentData[] = [
+  {
+    _id: 'helene',
+    name: 'Hurricane Helene',
+    jurisdiction: 'State of Florida',
+    role: 'Disaster Housing Operations — IMT Lead',
+    teamSize: 45,
+    status: 'active',
+    startDate: '2024-01-01',
+  },
+  {
+    _id: 'milton',
+    name: 'Hurricane Milton',
+    jurisdiction: 'State of Florida',
+    role: 'Individual Assistance IMT',
+    teamSize: 32,
+    status: 'active',
+    startDate: '2024-01-01',
+  },
+  {
+    _id: 'ky-tornadoes',
+    name: 'Western KY Tornadoes',
+    jurisdiction: 'Commonwealth of Kentucky',
+    role: 'Long-Term Recovery & EOC Staffing',
+    teamSize: 18,
+    status: 'complete',
+    startDate: '2021-01-01',
+    endDate: '2023-12-31',
+  },
+];
+
+const fallbackServices: ServiceData[] = [
+  {
+    _id: '1',
+    title: 'Incident Management Teams',
+    description:
+      'Trained, credentialed IMTs deployable within 24-72 hours to any jurisdiction in the nation.',
+  },
+  {
+    _id: '2',
+    title: 'EOC Management',
+    description:
+      'Full EOC staffing, activation support, and operational management for state and local governments.',
+  },
+  {
+    _id: '3',
+    title: 'Disaster Housing Operations',
+    description:
+      'End-to-end housing mission management from needs assessment through unit placement and closeout.',
+  },
+  {
+    _id: '4',
+    title: 'Specialty Response Teams',
+    description:
+      'Scalable, mission-ready SRT units for state and local deployment. Includes Florida SRT CAP operations.',
+  },
+  {
+    _id: '5',
+    title: 'Human Services',
+    description:
+      'Disaster case management, individual assistance programs, and community recovery support for impacted populations.',
+  },
+  {
+    _id: '6',
+    title: 'Grey Sky Travel',
+    description:
+      'Managed travel and logistics for deployed responders — housing, transport, and per diem coordination at operational tempo.',
+  },
+  {
+    _id: '7',
+    title: 'Strategic Resilience Planning',
+    description:
+      'Long-range capability development, COOP planning, and community resilience strategy.',
+  },
+  {
+    _id: '8',
+    title: 'Exercise Design & Evaluation',
+    description:
+      'HSEEP-compliant exercises that test real capability, not just check compliance boxes.',
+  },
+  {
+    _id: '9',
+    title: 'National Security & Expeditionary Ops',
+    description:
+      'Specialized capability development for defense and intelligence community requirements.',
+  },
+];
+
+const fallbackPrograms: ProgramData[] = [
+  {
+    _id: '1',
+    name: 'Grey Sky Responder Society',
+    status: 'active',
+    description:
+      'A credentialed network of field-proven emergency management professionals ready for rapid deployment nationwide.',
+  },
+  {
+    _id: '2',
+    name: 'Grey Sky Drone Program',
+    status: 'developing',
+    description:
+      'sUAS capability for damage assessment, situational awareness, and infrastructure inspection during disaster operations.',
+  },
+  {
+    _id: '3',
+    name: 'National Disaster Database',
+    status: 'developing',
+    description:
+      'Centralized operational intelligence platform for disaster data, deployment history, and lessons learned.',
+  },
+];
+
+/* ── Page Component ── */
+export default async function Home() {
+  // Fetch from Sanity with graceful fallback
+  const [statusBar, deployments, services, programs] = await Promise.all([
+    sanityFetch<StatusBarData>(statusBarQuery),
+    sanityFetch<DeploymentData[]>(featuredDeploymentsQuery),
+    sanityFetch<ServiceData[]>(servicesQuery),
+    sanityFetch<ProgramData[]>(programsQuery),
+  ]);
+
+  const status = statusBar ?? fallbackStatusBar;
+  const deploys = deployments && deployments.length > 0 ? deployments : fallbackDeployments;
+  const svcList = services && services.length > 0 ? services : fallbackServices;
+  const progList = programs && programs.length > 0 ? programs : fallbackPrograms;
+
   return (
     <>
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-command-navy px-4 py-24 text-center lg:py-36">
-        {/* Subtle grid overlay for EOC feel */}
+        {/* Topographic grid overlay for EOC feel */}
         <div
-          className="pointer-events-none absolute inset-0 opacity-[0.03]"
+          className="pointer-events-none absolute inset-0 opacity-[0.04]"
           style={{
-            backgroundImage:
-              'linear-gradient(rgba(197,147,58,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(197,147,58,0.3) 1px, transparent 1px)',
-            backgroundSize: '60px 60px',
+            backgroundImage: `
+              linear-gradient(rgba(197,147,58,0.3) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(197,147,58,0.3) 1px, transparent 1px),
+              radial-gradient(ellipse at 30% 50%, rgba(27,43,69,0.8) 0%, transparent 70%),
+              radial-gradient(ellipse at 70% 50%, rgba(27,43,69,0.6) 0%, transparent 70%)
+            `,
+            backgroundSize: '60px 60px, 60px 60px, 100% 100%, 100% 100%',
           }}
         />
+        {/* Gradient depth */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-command-navy/50 via-transparent to-command-navy/80" />
         <div className="relative mx-auto max-w-4xl">
           <Image
             src="/lvsg-logo-white.png"
             alt="Longview Solutions Group"
             width={80}
             height={80}
+            priority
             className="mx-auto mb-6 opacity-90"
           />
           <h1 className="font-display text-4xl font-bold leading-tight tracking-tight text-clean-white lg:text-6xl">
@@ -61,14 +276,17 @@ export default function Home() {
               Operational Status
             </span>
             <span className="font-mono text-xs uppercase tracking-widest text-medium-gray">
-              &mdash; Watch Office: QUIET
+              &mdash; Watch Office: {status.watchStatus || 'QUIET'}
             </span>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-8 text-center lg:justify-between">
-            <StatusMetric value="3" label="Active Missions" />
-            <StatusMetric value="12" label="States Served" />
-            <StatusMetric value="150+" label="Responders Credentialed" />
-            <StatusMetric value="20+" label="Years of Operations" />
+            <StatusMetric value={String(status.activeMissions ?? 3)} label="Active Missions" />
+            <StatusMetric value={String(status.statesServed ?? 12)} label="States Served" />
+            <StatusMetric
+              value={status.respondersCredentialed ?? '150+'}
+              label="Responders Credentialed"
+            />
+            <StatusMetric value={status.yearsOfOperations ?? '20+'} label="Years of Operations" />
           </div>
         </div>
       </section>
@@ -78,18 +296,23 @@ export default function Home() {
         <div className="mx-auto max-w-5xl">
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 font-mono text-xs tracking-wide">
             <span className="font-semibold uppercase text-signal-gold">Current Ops:</span>
-            <span className="text-light-gray">
-              <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-green-400" />
-              Helene Housing Ops (FL)
-            </span>
-            <span className="text-light-gray">
-              <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-green-400" />
-              Milton IA IMT (FL)
-            </span>
-            <span className="text-light-gray">
-              <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-yellow-400" />
-              Western KY Tornado Recovery
-            </span>
+            {deploys
+              .filter((d) => d.status === 'active')
+              .map((d) => (
+                <span key={d._id} className="text-light-gray">
+                  <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-green-400" />
+                  {d.name} ({d.state || d.jurisdiction})
+                </span>
+              ))}
+            {deploys
+              .filter((d) => d.status !== 'active')
+              .slice(0, 1)
+              .map((d) => (
+                <span key={d._id} className="text-light-gray">
+                  <span className="mr-1.5 inline-block h-1.5 w-1.5 rounded-full bg-yellow-400" />
+                  {d.name}
+                </span>
+              ))}
           </div>
         </div>
       </section>
@@ -161,47 +384,19 @@ export default function Home() {
             From strategic planning to boots on the ground.
           </p>
           <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <ServiceCard
-              title="Incident Management Teams"
-              description="Trained, credentialed IMTs deployable within 24-72 hours to any jurisdiction in the nation."
-            />
-            <ServiceCard
-              title="EOC Management"
-              description="Full EOC staffing, activation support, and operational management for state and local governments."
-            />
-            <ServiceCard
-              title="Disaster Housing Operations"
-              description="End-to-end housing mission management from needs assessment through unit placement and closeout."
-            />
-            <ServiceCard
-              title="Specialty Response Teams"
-              description="Scalable, mission-ready SRT units for state and local deployment. Includes Florida SRT CAP operations."
-            />
-            <ServiceCard
-              title="Human Services"
-              description="Disaster case management, individual assistance programs, and community recovery support for impacted populations."
-            />
-            <ServiceCard
-              title="Grey Sky Travel"
-              description="Managed travel and logistics for deployed responders — housing, transport, and per diem coordination at operational tempo."
-            />
-            <ServiceCard
-              title="Strategic Resilience Planning"
-              description="Long-range capability development, COOP planning, and community resilience strategy."
-            />
-            <ServiceCard
-              title="Exercise Design & Evaluation"
-              description="HSEEP-compliant exercises that test real capability, not just check compliance boxes."
-            />
-            <ServiceCard
-              title="National Security & Expeditionary Ops"
-              description="Specialized capability development for defense and intelligence community requirements."
-            />
+            {svcList.map((svc) => (
+              <ServiceCard
+                key={svc._id}
+                title={svc.title}
+                description={svc.description}
+                icon={serviceIconMap[svc.title]}
+              />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Recent Deployments — Sprint 3 requirement */}
+      {/* Recent Deployments */}
       <section className="bg-command-navy px-4 py-20">
         <div className="mx-auto max-w-6xl">
           <h2 className="font-display text-center text-3xl font-bold text-clean-white">
@@ -211,30 +406,17 @@ export default function Home() {
             Operational credibility. Documented outcomes.
           </p>
           <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
-            <DeploymentCard
-              disaster="Hurricane Helene"
-              jurisdiction="State of Florida"
-              role="Disaster Housing Operations — IMT Lead"
-              teamSize={45}
-              status="active"
-              year="2024"
-            />
-            <DeploymentCard
-              disaster="Hurricane Milton"
-              jurisdiction="State of Florida"
-              role="Individual Assistance IMT"
-              teamSize={32}
-              status="active"
-              year="2024"
-            />
-            <DeploymentCard
-              disaster="Western KY Tornadoes"
-              jurisdiction="Commonwealth of Kentucky"
-              role="Long-Term Recovery & EOC Staffing"
-              teamSize={18}
-              status="complete"
-              year="2021–2023"
-            />
+            {deploys.map((d) => (
+              <DeploymentCard
+                key={d._id}
+                disaster={d.name}
+                jurisdiction={d.jurisdiction}
+                role={d.role}
+                teamSize={d.teamSize}
+                status={d.status as 'active' | 'complete'}
+                year={formatYear(d.startDate, d.endDate)}
+              />
+            ))}
           </div>
           <div className="mt-10 text-center">
             <Link
@@ -259,6 +441,7 @@ export default function Home() {
           <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-3">
             <GovColumn
               title="Contract Vehicles"
+              icon={<Shield className="mx-auto mb-3 h-8 w-8 text-signal-gold" />}
               items={[
                 'Florida DMS State Term Contract',
                 'SAM.gov Registered',
@@ -268,6 +451,7 @@ export default function Home() {
             />
             <GovColumn
               title="Framework Alignment"
+              icon={<ClipboardList className="mx-auto mb-3 h-8 w-8 text-signal-gold" />}
               items={[
                 'NIMS / ICS Compliant',
                 'EMAP Standards',
@@ -277,6 +461,7 @@ export default function Home() {
             />
             <GovColumn
               title="Past Performance"
+              icon={<Target className="mx-auto mb-3 h-8 w-8 text-signal-gold" />}
               items={[
                 'Multi-state disaster operations',
                 'FEMA-coordinated housing missions',
@@ -296,7 +481,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Current Initiatives — Sprint 4 pulled forward */}
+      {/* Current Initiatives */}
       <section className="bg-light-gray px-4 py-20">
         <div className="mx-auto max-w-6xl">
           <h2 className="font-display text-center text-3xl font-bold text-command-navy">
@@ -306,21 +491,14 @@ export default function Home() {
             Building tomorrow&apos;s capability today.
           </p>
           <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
-            <InitiativeCard
-              name="Grey Sky Responder Society"
-              status="Active"
-              description="A credentialed network of field-proven emergency management professionals ready for rapid deployment nationwide."
-            />
-            <InitiativeCard
-              name="Grey Sky Drone Program"
-              status="Developing"
-              description="sUAS capability for damage assessment, situational awareness, and infrastructure inspection during disaster operations."
-            />
-            <InitiativeCard
-              name="National Disaster Database"
-              status="Developing"
-              description="Centralized operational intelligence platform for disaster data, deployment history, and lessons learned."
-            />
+            {progList.map((prog) => (
+              <InitiativeCard
+                key={prog._id}
+                name={prog.name}
+                status={prog.status}
+                description={prog.description}
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -354,6 +532,16 @@ export default function Home() {
   );
 }
 
+/* ── Utility ── */
+
+function formatYear(start?: string, end?: string): string {
+  if (!start) return '';
+  const startYear = new Date(start).getFullYear();
+  if (!end) return String(startYear);
+  const endYear = new Date(end).getFullYear();
+  return startYear === endYear ? String(startYear) : `${startYear}–${endYear}`;
+}
+
 /* ── Helper Components ── */
 
 function StatusMetric({ value, label }: { value: string; label: string }) {
@@ -367,9 +555,20 @@ function StatusMetric({ value, label }: { value: string; label: string }) {
   );
 }
 
-function ServiceCard({ title, description }: { title: string; description: string }) {
+function ServiceCard({
+  title,
+  description,
+  icon: Icon,
+}: {
+  title: string;
+  description: string;
+  icon?: React.ElementType;
+}) {
   return (
-    <div className="rounded-md border border-light-gray bg-clean-white p-6 transition-shadow hover:shadow-md">
+    <div className="group rounded-md border border-light-gray bg-clean-white p-6 transition-shadow hover:shadow-md">
+      {Icon && (
+        <Icon className="mb-3 h-8 w-8 text-signal-gold transition-colors group-hover:text-command-navy" />
+      )}
       <h3 className="font-display text-lg font-bold text-command-navy">{title}</h3>
       <p className="mt-2 text-sm leading-relaxed text-dark-charcoal">{description}</p>
     </div>
@@ -418,9 +617,18 @@ function DeploymentCard({
   );
 }
 
-function GovColumn({ title, items }: { title: string; items: string[] }) {
+function GovColumn({
+  title,
+  icon,
+  items,
+}: {
+  title: string;
+  icon?: React.ReactNode;
+  items: string[];
+}) {
   return (
     <div className="border-t-2 border-signal-gold pt-6 text-center">
+      {icon}
       <h3 className="font-display text-lg font-bold text-command-navy">{title}</h3>
       <ul className="mt-3 space-y-2">
         {items.map((item) => (
@@ -446,12 +654,13 @@ function InitiativeCard({
   status: string;
   description: string;
 }) {
+  const isActive = status === 'active' || status === 'Active';
   return (
     <div className="rounded-md border border-light-gray bg-clean-white p-6">
       <div className="mb-3 flex items-center justify-between">
         <span
           className={`font-mono text-[10px] font-semibold uppercase tracking-widest ${
-            status === 'Active' ? 'text-green-600' : 'text-signal-gold'
+            isActive ? 'text-green-600' : 'text-signal-gold'
           }`}
         >
           {status}
