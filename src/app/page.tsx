@@ -6,6 +6,7 @@ import {
   featuredDeploymentsQuery,
   servicesQuery,
   programsQuery,
+  intelQuery,
 } from '@/sanity/lib/queries';
 import {
   Shield,
@@ -17,6 +18,7 @@ import {
   Target,
   ClipboardList,
   Lock,
+  FileText,
 } from 'lucide-react';
 
 /* ── Icon map for service lines ── */
@@ -72,6 +74,16 @@ interface ProgramData {
   description: string;
   teamStructure?: string;
   status: string;
+}
+
+interface IntelData {
+  _id: string;
+  title: string;
+  slug?: { current: string };
+  category?: string;
+  author?: string;
+  excerpt: string;
+  publishedAt: string;
 }
 
 /* ── Hardcoded fallbacks ── */
@@ -171,6 +183,36 @@ const fallbackServices: ServiceData[] = [
   },
 ];
 
+const fallbackIntel: IntelData[] = [
+  {
+    _id: 'intel-1',
+    title: 'After Action: Hurricane Helene Housing Operations',
+    category: 'After Action',
+    author: 'Roy E. Dunn, CEMO',
+    excerpt:
+      'Lessons learned from deploying 45 personnel across multiple Florida counties for disaster housing mission operations.',
+    publishedAt: '2025-01-15',
+  },
+  {
+    _id: 'intel-2',
+    title: 'The State of Disaster Housing in America',
+    category: 'Policy Analysis',
+    author: 'Longview Solutions Group',
+    excerpt:
+      'An operational assessment of the growing gap between housing need and capacity in post-disaster environments.',
+    publishedAt: '2024-11-20',
+  },
+  {
+    _id: 'intel-3',
+    title: 'Building a Deployable Workforce: The Grey Sky Model',
+    category: 'Operational Brief',
+    author: 'Roy E. Dunn, CEMO',
+    excerpt:
+      'How credentialed responder networks are changing the speed and quality of emergency management staffing.',
+    publishedAt: '2024-09-10',
+  },
+];
+
 const fallbackPrograms: ProgramData[] = [
   {
     _id: '1',
@@ -198,17 +240,19 @@ const fallbackPrograms: ProgramData[] = [
 /* ── Page Component ── */
 export default async function Home() {
   // Fetch from Sanity with graceful fallback
-  const [statusBar, deployments, services, programs] = await Promise.all([
+  const [statusBar, deployments, services, programs, intelArticles] = await Promise.all([
     sanityFetch<StatusBarData>(statusBarQuery),
     sanityFetch<DeploymentData[]>(featuredDeploymentsQuery),
     sanityFetch<ServiceData[]>(servicesQuery),
     sanityFetch<ProgramData[]>(programsQuery),
+    sanityFetch<IntelData[]>(intelQuery),
   ]);
 
   const status = statusBar ?? fallbackStatusBar;
   const deploys = deployments && deployments.length > 0 ? deployments : fallbackDeployments;
   const svcList = services && services.length > 0 ? services : fallbackServices;
   const progList = programs && programs.length > 0 ? programs : fallbackPrograms;
+  const articles = intelArticles && intelArticles.length > 0 ? intelArticles : fallbackIntel;
 
   return (
     <>
@@ -503,6 +547,29 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Intel / Thought Leadership */}
+      <section className="px-4 py-20">
+        <div className="mx-auto max-w-6xl">
+          <h2 className="font-display text-center text-3xl font-bold text-command-navy">INTEL</h2>
+          <p className="mt-2 text-center text-base text-dark-charcoal">
+            Operational insights from the field.
+          </p>
+          <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+            {articles.map((article) => (
+              <IntelCard key={article._id} article={article} />
+            ))}
+          </div>
+          <div className="mt-10 text-center">
+            <Link
+              href="/intel"
+              className="rounded border border-command-navy/30 px-8 py-3 text-sm font-bold tracking-wide text-command-navy transition-colors hover:border-command-navy hover:bg-command-navy/5"
+            >
+              VIEW ALL INTEL
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Join the Mission */}
       <section className="bg-command-navy px-4 py-20 text-center">
         <div className="mx-auto max-w-3xl">
@@ -641,6 +708,36 @@ function GovColumn({
           </li>
         ))}
       </ul>
+    </div>
+  );
+}
+
+function IntelCard({ article }: { article: IntelData }) {
+  const date = article.publishedAt
+    ? new Date(article.publishedAt).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+      })
+    : '';
+  return (
+    <div className="group rounded-md border border-light-gray bg-clean-white p-6 transition-shadow hover:shadow-md">
+      <div className="mb-3 flex items-center gap-3">
+        <FileText className="h-5 w-5 text-signal-gold" />
+        {article.category && (
+          <span className="font-mono text-[10px] font-semibold uppercase tracking-widest text-signal-gold">
+            {article.category}
+          </span>
+        )}
+      </div>
+      <h3 className="font-display text-lg font-bold leading-snug text-command-navy">
+        {article.title}
+      </h3>
+      <p className="mt-2 text-sm leading-relaxed text-dark-charcoal">{article.excerpt}</p>
+      <div className="mt-4 flex items-center justify-between font-mono text-[10px] tracking-wide text-medium-gray">
+        <span>{article.author}</span>
+        <span>{date}</span>
+      </div>
     </div>
   );
 }
