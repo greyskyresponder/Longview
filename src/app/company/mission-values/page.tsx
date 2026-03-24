@@ -81,22 +81,22 @@ const colorStyles: Record<
   { card: string; badge: string; title: string; def: string; body: string }
 > = {
   red: {
-    card: 'border-alert-red/30 bg-alert-red/10',
-    badge: 'border-alert-red/40 text-alert-red',
+    card: 'border-alert-red/50 bg-alert-red/20',
+    badge: 'border-alert-red/60 text-red-300',
     title: 'text-clean-white',
-    def: 'text-light-gray/70',
+    def: 'text-red-200/60',
     body: 'text-light-gray',
   },
   white: {
-    card: 'border-light-gray/30 bg-clean-white/10',
-    badge: 'border-clean-white/40 text-clean-white',
+    card: 'border-clean-white/40 bg-clean-white/15',
+    badge: 'border-clean-white/60 text-clean-white',
     title: 'text-clean-white',
-    def: 'text-light-gray/70',
+    def: 'text-light-gray/80',
     body: 'text-light-gray',
   },
   blue: {
-    card: 'border-steel-blue bg-steel-blue/40',
-    badge: 'border-signal-gold/40 text-signal-gold',
+    card: 'border-steel-blue bg-steel-blue/50',
+    badge: 'border-signal-gold/50 text-signal-gold',
     title: 'text-clean-white',
     def: 'text-medium-gray',
     body: 'text-light-gray',

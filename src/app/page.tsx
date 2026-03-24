@@ -277,10 +277,10 @@ export default async function Home() {
           <Image
             src="/lvsg-logo-white.png"
             alt="Longview Solutions Group"
-            width={140}
-            height={140}
+            width={200}
+            height={200}
             priority
-            className="mx-auto mb-6 opacity-90"
+            className="mx-auto mb-8 h-auto opacity-90"
           />
           <h1 className="font-display text-4xl font-bold leading-tight tracking-tight text-clean-white lg:text-6xl">
             LONGVIEW SOLUTIONS GROUP
