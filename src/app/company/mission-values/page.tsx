@@ -8,9 +8,21 @@ export const metadata: Metadata = {
     'Faith, valor, and operational excellence \u2014 the seven values that guide every LvSG deployment.',
 };
 
-const values = [
+/* Color groups per heraldic tradition:
+   Red (Alert Red tint): Valor, Bravery
+   White (Clean White tint): Purity, Innocence
+   Blue (Steel Blue — current): Vigilance, Perseverance, Justice */
+type ValueColor = 'red' | 'white' | 'blue';
+
+const values: {
+  name: string;
+  definition: string;
+  application: string;
+  color: ValueColor;
+}[] = [
   {
     name: 'Valor',
+    color: 'red',
     definition:
       'Strength of mind or spirit that enables a person to encounter danger with firmness.',
     application:
@@ -18,6 +30,7 @@ const values = [
   },
   {
     name: 'Bravery',
+    color: 'red',
     definition:
       'The quality or state of having or showing mental or moral strength to face danger, fear, or difficulty.',
     application:
@@ -25,6 +38,7 @@ const values = [
   },
   {
     name: 'Purity',
+    color: 'white',
     definition:
       'Freedom from moral fault or guilt; the quality of being without mixture or adulteration.',
     application:
@@ -32,18 +46,21 @@ const values = [
   },
   {
     name: 'Innocence',
+    color: 'white',
     definition: 'Freedom from guilt or sin through being unacquainted with evil.',
     application:
       'We approach every engagement with fresh eyes and no hidden agenda. We serve at the pleasure of the jurisdiction. When the mission is complete, we leave the community stronger than we found it\u2014and take nothing that wasn\u2019t earned.',
   },
   {
     name: 'Vigilance',
+    color: 'blue',
     definition: 'The quality or state of being wakeful and alert; alertness to danger.',
     application:
       'Emergency management is not a 9-to-5 profession. Our Watch Office monitors. Our teams prepare. Our systems are always operational. Vigilance means being ready before the call comes, not scrambling after.',
   },
   {
     name: 'Perseverance',
+    color: 'blue',
     definition:
       'Continued effort to do or achieve something despite difficulties, failure, or opposition.',
     application:
@@ -51,12 +68,40 @@ const values = [
   },
   {
     name: 'Justice',
+    color: 'blue',
     definition:
       'The maintenance or administration of what is just; the quality of being fair and reasonable.',
     application:
       'Every community deserves expert crisis leadership, regardless of size, wealth, or political visibility. We treat every jurisdiction with the same operational rigor and every survivor with the same dignity.',
   },
 ];
+
+const colorStyles: Record<
+  ValueColor,
+  { card: string; badge: string; title: string; def: string; body: string }
+> = {
+  red: {
+    card: 'border-alert-red/30 bg-alert-red/10',
+    badge: 'border-alert-red/40 text-alert-red',
+    title: 'text-clean-white',
+    def: 'text-light-gray/70',
+    body: 'text-light-gray',
+  },
+  white: {
+    card: 'border-light-gray/30 bg-clean-white/10',
+    badge: 'border-clean-white/40 text-clean-white',
+    title: 'text-clean-white',
+    def: 'text-light-gray/70',
+    body: 'text-light-gray',
+  },
+  blue: {
+    card: 'border-steel-blue bg-steel-blue/40',
+    badge: 'border-signal-gold/40 text-signal-gold',
+    title: 'text-clean-white',
+    def: 'text-medium-gray',
+    body: 'text-light-gray',
+  },
+};
 
 export default function MissionValuesPage() {
   return (
@@ -173,25 +218,30 @@ export default function MissionValuesPage() {
             Inspired by the heraldic traditions of service. Applied to every operation.
           </p>
           <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {values.map((v, i) => (
-              <div
-                key={v.name}
-                className={`rounded-md border border-steel-blue bg-steel-blue/40 p-6 ${
-                  i === 6 ? 'md:col-span-2 lg:col-span-1' : ''
-                }`}
-              >
-                <div className="mb-3 flex items-center gap-3">
-                  <span className="flex h-8 w-8 items-center justify-center rounded-full border border-signal-gold/40 font-mono text-xs font-bold text-signal-gold">
-                    {i + 1}
-                  </span>
-                  <h3 className="font-display text-xl font-bold text-clean-white">{v.name}</h3>
+            {values.map((v, i) => {
+              const cs = colorStyles[v.color];
+              return (
+                <div
+                  key={v.name}
+                  className={`rounded-md border p-6 ${cs.card} ${
+                    i === 6 ? 'md:col-span-2 lg:col-span-1' : ''
+                  }`}
+                >
+                  <div className="mb-3 flex items-center gap-3">
+                    <span
+                      className={`flex h-8 w-8 items-center justify-center rounded-full border font-mono text-xs font-bold ${cs.badge}`}
+                    >
+                      {i + 1}
+                    </span>
+                    <h3 className={`font-display text-xl font-bold ${cs.title}`}>{v.name}</h3>
+                  </div>
+                  <p className={`mb-3 font-mono text-xs italic leading-relaxed ${cs.def}`}>
+                    &ldquo;{v.definition}&rdquo;
+                  </p>
+                  <p className={`text-sm leading-relaxed ${cs.body}`}>{v.application}</p>
                 </div>
-                <p className="mb-3 font-mono text-xs italic leading-relaxed text-medium-gray">
-                  &ldquo;{v.definition}&rdquo;
-                </p>
-                <p className="text-sm leading-relaxed text-light-gray">{v.application}</p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

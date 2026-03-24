@@ -277,8 +277,8 @@ export default async function Home() {
           <Image
             src="/lvsg-logo-white.png"
             alt="Longview Solutions Group"
-            width={80}
-            height={80}
+            width={140}
+            height={140}
             priority
             className="mx-auto mb-6 opacity-90"
           />
