@@ -274,15 +274,20 @@ export default async function Home() {
         {/* Gradient depth */}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-command-navy/50 via-transparent to-command-navy/80" />
         <div className="relative mx-auto max-w-4xl">
-          {/* Logo watermark — large, subtle, behind text */}
+          {/* Logo watermark — lighthouse visible, text faded via gradient mask */}
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
             <Image
               src="/lvsg-logo-white.png"
               alt=""
-              width={400}
-              height={400}
+              width={480}
+              height={480}
               priority
-              className="h-auto opacity-[0.08]"
+              className="h-auto opacity-[0.06]"
+              style={{
+                marginTop: '-2rem',
+                maskImage: 'linear-gradient(to bottom, black 45%, transparent 70%)',
+                WebkitMaskImage: 'linear-gradient(to bottom, black 45%, transparent 70%)',
+              }}
             />
           </div>
           <h1 className="font-display relative text-4xl font-bold leading-tight tracking-tight text-clean-white lg:text-6xl">
