@@ -274,25 +274,28 @@ export default async function Home() {
         {/* Gradient depth */}
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-command-navy/50 via-transparent to-command-navy/80" />
         <div className="relative mx-auto max-w-4xl">
-          <Image
-            src="/lvsg-logo-white.png"
-            alt="Longview Solutions Group"
-            width={200}
-            height={200}
-            priority
-            className="mx-auto mb-8 h-auto opacity-90"
-          />
-          <h1 className="font-display text-4xl font-bold leading-tight tracking-tight text-clean-white lg:text-6xl">
+          {/* Logo watermark — large, subtle, behind text */}
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+            <Image
+              src="/lvsg-logo-white.png"
+              alt=""
+              width={400}
+              height={400}
+              priority
+              className="h-auto opacity-[0.08]"
+            />
+          </div>
+          <h1 className="font-display relative text-4xl font-bold leading-tight tracking-tight text-clean-white lg:text-6xl">
             LONGVIEW SOLUTIONS GROUP
           </h1>
-          <p className="font-display mt-4 text-xl font-semibold text-signal-gold lg:text-2xl">
+          <p className="font-display relative mt-4 text-xl font-semibold text-signal-gold lg:text-2xl">
             When the Call Comes, We Deploy.
           </p>
-          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-light-gray lg:text-xl">
+          <p className="relative mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-light-gray lg:text-xl">
             We don&apos;t write reports about disasters. We staff the EOC, deploy the teams, and
             manage the mission&mdash;start to finish.
           </p>
-          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <div className="relative mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Link
               href="/contact/consultation"
               className="rounded bg-signal-gold px-8 py-3 text-sm font-bold tracking-wide text-clean-white transition-colors hover:bg-signal-gold/90"
