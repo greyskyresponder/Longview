@@ -8,6 +8,7 @@ import intel from './intel';
 import program from './program';
 import page from './page';
 import capabilityStatement from './capabilityStatement';
+import srtDiscipline from './srtDiscipline';
 
 export const schemaTypes = [
   // Operations
@@ -20,6 +21,7 @@ export const schemaTypes = [
   intel,
   program,
   capabilityStatement,
+  srtDiscipline,
 
   // People
   leader,

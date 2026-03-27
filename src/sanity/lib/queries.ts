@@ -106,3 +106,15 @@ export const programsQuery = groq`*[_type == "program"] | order(orderRank asc){
   teamStructure,
   status
 }`;
+
+// SRT Disciplines — Florida SRT CAP
+export const srtDisciplinesQuery = groq`*[_type == "srtDiscipline"] | order(orderRank asc){
+  _id,
+  name,
+  slug,
+  abbreviation,
+  description,
+  assessmentPdf,
+  uploadUrl,
+  status
+}`;

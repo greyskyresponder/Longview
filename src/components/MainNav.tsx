@@ -20,6 +20,7 @@ const navItems = [
     dropdown: [
       { label: 'Services Overview', href: '/capabilities/services' },
       { label: 'Specialty Response Teams', href: '/capabilities/srt' },
+      { label: 'Florida SRT CAP', href: '/capabilities/srt/florida-srt-cap' },
       { label: 'Grey Sky Travel', href: '/capabilities/grey-sky-travel' },
       { label: 'Programs', href: '/capabilities/programs' },
       { label: 'Methodology & Standards', href: '/capabilities/methodology' },
