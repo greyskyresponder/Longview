@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import {
   Shield,
@@ -163,6 +164,22 @@ const disciplineIcons: Record<string, React.ElementType> = {
   Waterborne: Anchor,
 };
 
+const thumbnailMap: Record<string, string> = {
+  'Animal SAR': '/images/srt/thumbnails/animal-sar.jpg',
+  Bomb: '/images/srt/thumbnails/bomb-response.jpg',
+  EOC: '/images/srt/thumbnails/eoc-support.jpg',
+  HazMat: '/images/srt/thumbnails/hazmat.jpg',
+  IMT: '/images/srt/thumbnails/imt.jpg',
+  'Land SAR': '/images/srt/thumbnails/land-sar.jpg',
+  'Helo SAR': '/images/srt/thumbnails/helo-sar.jpg',
+  Dive: '/images/srt/thumbnails/dive.jpg',
+  sUAS: '/images/srt/thumbnails/suas.jpg',
+  SWAT: '/images/srt/thumbnails/swat.jpg',
+  Swiftwater: '/images/srt/thumbnails/swiftwater.jpg',
+  USAR: '/images/srt/thumbnails/usar.jpg',
+  Waterborne: '/images/srt/thumbnails/waterborne.jpg',
+};
+
 export default async function FloridaSrtCapPage() {
   const sanityData = await sanityFetch<SrtDiscipline[]>(srtDisciplinesQuery);
   const disciplines = sanityData && sanityData.length > 0 ? sanityData : fallbackDisciplines;
@@ -264,69 +281,102 @@ export default async function FloridaSrtCapPage() {
             {disciplines.map((d) => {
               const Icon = disciplineIcons[d.abbreviation || ''] || Shield;
               const isComingSoon = d.status === 'coming-soon';
+              const thumb = thumbnailMap[d.abbreviation || ''];
 
               return (
                 <div
                   key={d._id}
-                  className={`rounded-md border bg-clean-white p-5 transition-shadow ${
+                  className={`overflow-hidden rounded-md border bg-clean-white transition-shadow ${
                     isComingSoon
                       ? 'border-light-gray opacity-60'
                       : 'border-light-gray hover:shadow-md'
                   }`}
                 >
-                  <div className="mb-3 flex items-start justify-between">
-                    <Icon
-                      className={`h-6 w-6 ${isComingSoon ? 'text-medium-gray' : 'text-signal-gold'}`}
-                    />
-                    {isComingSoon && (
-                      <span className="font-mono text-[10px] font-semibold uppercase tracking-widest text-medium-gray">
-                        Coming Soon
-                      </span>
-                    )}
-                    {!isComingSoon && d.abbreviation && (
-                      <span className="font-mono text-[10px] font-semibold uppercase tracking-widest text-signal-gold">
-                        {d.abbreviation}
-                      </span>
-                    )}
-                  </div>
-                  <h3 className="font-display text-base font-bold leading-snug text-command-navy">
-                    {d.name}
-                  </h3>
-                  {d.description && (
-                    <p className="mt-2 text-xs leading-relaxed text-dark-charcoal">
-                      {d.description}
-                    </p>
-                  )}
-                  {!isComingSoon && (
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {d.assessmentPdf && (
-                        <a
-                          href={d.assessmentPdf}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 rounded bg-command-navy px-3 py-1.5 text-xs font-semibold text-clean-white transition-colors hover:bg-steel-blue"
-                        >
-                          <Download className="h-3 w-3" />
-                          Download PDF
-                        </a>
-                      )}
-                      {d.uploadUrl && (
-                        <a
-                          href={d.uploadUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 rounded border border-signal-gold/40 px-3 py-1.5 text-xs font-semibold text-signal-gold transition-colors hover:border-signal-gold hover:bg-signal-gold/5"
-                        >
-                          <Upload className="h-3 w-3" />
-                          Submit Assessment
-                        </a>
+                  {/* Thumbnail */}
+                  {thumb && (
+                    <div className="relative h-48 w-full overflow-hidden bg-steel-blue/10">
+                      <Image
+                        src={thumb}
+                        alt={`${d.name} assessment cover`}
+                        fill
+                        className="object-cover object-top"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                      {isComingSoon && (
+                        <div className="absolute inset-0 flex items-center justify-center bg-command-navy/60">
+                          <span className="font-mono text-xs font-semibold uppercase tracking-widest text-clean-white">
+                            Coming Soon
+                          </span>
+                        </div>
                       )}
                     </div>
                   )}
+                  <div className="p-5">
+                    <div className="mb-3 flex items-start justify-between">
+                      <Icon
+                        className={`h-5 w-5 ${isComingSoon ? 'text-medium-gray' : 'text-signal-gold'}`}
+                      />
+                      {!isComingSoon && d.abbreviation && (
+                        <span className="font-mono text-[10px] font-semibold uppercase tracking-widest text-signal-gold">
+                          {d.abbreviation}
+                        </span>
+                      )}
+                    </div>
+                    <h3 className="font-display text-base font-bold leading-snug text-command-navy">
+                      {d.name}
+                    </h3>
+                    {d.description && (
+                      <p className="mt-2 text-xs leading-relaxed text-dark-charcoal">
+                        {d.description}
+                      </p>
+                    )}
+                    {!isComingSoon && (
+                      <div className="mt-4 flex flex-wrap gap-2">
+                        {d.assessmentPdf && (
+                          <a
+                            href={d.assessmentPdf}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 rounded bg-command-navy px-3 py-1.5 text-xs font-semibold text-clean-white transition-colors hover:bg-steel-blue"
+                          >
+                            <Download className="h-3 w-3" />
+                            Download PDF
+                          </a>
+                        )}
+                        {d.uploadUrl && (
+                          <a
+                            href={d.uploadUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 rounded border border-signal-gold/40 px-3 py-1.5 text-xs font-semibold text-signal-gold transition-colors hover:border-signal-gold hover:bg-signal-gold/5"
+                          >
+                            <Upload className="h-3 w-3" />
+                            Submit Assessment
+                          </a>
+                        )}
+                      </div>
+                    )}
+                  </div>
                 </div>
               );
             })}
           </div>
+        </div>
+      </section>
+
+      {/* Assessed Agencies & Teams */}
+      <section className="border-t border-light-gray bg-clean-white px-4 py-12">
+        <div className="mx-auto max-w-5xl text-center">
+          <p className="mb-6 font-mono text-xs font-semibold uppercase tracking-[0.3em] text-medium-gray">
+            Assessed Agencies &amp; Teams
+          </p>
+          <Image
+            src="/images/srt/logos/sert-dem-srt-logos.png"
+            alt="Logos of Florida agencies and teams assessed through the SRT Capability Assessment Program including SERT, FDEM, and specialty response teams"
+            width={900}
+            height={200}
+            className="mx-auto h-auto w-full max-w-4xl opacity-80 grayscale transition-all hover:opacity-100 hover:grayscale-0"
+          />
         </div>
       </section>
 
